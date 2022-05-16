@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import '/screens/skeleton/tracking_screens/Tab_bar/tracking_tab_bar.dart';
+import '/screens/skeleton/status_screens/Tab_bar/status_tab_bar.dart';
 import '/screens/skeleton/notifications/noti.dart';
-import '/screens/skeleton/Page1/Tab_bar/status_tab_bar.dart';
+import '/screens/skeleton/accounts/account.dart';
+import 'package:flutter/material.dart';
 
 class Page1 extends StatefulWidget {
   const Page1({Key? key}) : super(key: key);
@@ -14,8 +16,8 @@ class _Page1State extends State<Page1> {
   static const List<Widget> _widgetList = [
     Status(),
     Noti(),
-    Noti(),
-    Noti(),
+    Track(),
+    Account(),
   ];
 
   @override
@@ -38,7 +40,7 @@ class _Page1State extends State<Page1> {
       items: const [
         BottomNavigationBarItem(
           label: "",
-          icon: Icon(Icons.person),
+          icon: ImageIcon(AssetImage("assets/checkBox.png")),
         ),
         BottomNavigationBarItem(
           label: "",
@@ -46,11 +48,11 @@ class _Page1State extends State<Page1> {
         ),
         BottomNavigationBarItem(
           label: "",
-          icon: Icon(Icons.notifications),
+          icon: ImageIcon(AssetImage("assets/notepad.png")),
         ),
         BottomNavigationBarItem(
           label: "",
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.person_outlined),
         ),
       ],
       currentIndex: curr,

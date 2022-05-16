@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/values.dart';
 import '/screens/auth_pages/util.dart';
 
 class SignUp extends StatefulWidget {
@@ -11,34 +12,35 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
+
     return Form(
         child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 26.0, vertical: 8.0),
+      padding: EdgeInsets.symmetric(horizontal: kFormHorizontal),
       child: SingleChildScrollView(
         child: Column(
-         children: [
-           const SizedBox(height: 40),
+          children: [
+            SizedBox(height: kFormSpacing),
 
-           formElement("FIRST NAME", ""),
-           const SizedBox(height: 20),
+            formElement("FIRST NAME", ""),
+            SizedBox(height: kFormSpacing),
 
-           formElement("LAST NAME", ""),
-           const SizedBox(height: 20),
+            formElement("LAST NAME", ""),
+            SizedBox(height: kFormSpacing),
 
-           formElement("EMAIL ADDRESS", "abc@gmail.com"),
-           const SizedBox(height: 20),
+            formElement("EMAIL ADDRESS", "abc@gmail.com"),
+            SizedBox(height: kFormSpacing),
 
-           formElement("DESIGNATION", "Initiator, SPOC, Director"),
-           const SizedBox(height: 20),
+            formElement("DESIGNATION", "Initiator, SPOC, Director"),
+            SizedBox(height: kFormSpacing),
 
-           formElement("PASSWORD", ""),
-           const SizedBox(height: 20),
+            formElement("PASSWORD", ""),
+            SizedBox(height: kFormSpacing),
 
-           Center(
-             child: button("SIGN UP"),
-           ),
-         ],
-          ),
+            Center(
+              child: button("SIGN UP"),
+            ),
+          ],
+        ),
       ),
     ));
   }

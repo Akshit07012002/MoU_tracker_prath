@@ -10,6 +10,17 @@ class Noti extends StatefulWidget {
 class _NotiState extends State<Noti> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(child: Text("Notifications")),
+        ],
+      ),
+    );
   }
 }

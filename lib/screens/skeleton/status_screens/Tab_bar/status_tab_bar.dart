@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:mou_tracker/values.dart';
-import '/screens/auth_pages/tab_bar/sign_in_tab.dart';
-import '/screens/auth_pages/tab_bar/sign_up_tab.dart';
+import '/values.dart';
 
-class Auth extends StatefulWidget {
-  const Auth({Key? key}) : super(key: key);
+import 'Tabs/delayed_tab.dart';
+import 'Tabs/on_track_tab.dart';
+
+class Status extends StatefulWidget {
+  const Status({Key? key}) : super(key: key);
 
   @override
-  _AuthState createState() => _AuthState();
+  _StatusState createState() => _StatusState();
 }
 
-class _AuthState extends State<Auth> with SingleTickerProviderStateMixin {
+class _StatusState extends State<Status> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   @override
   void initState() {
@@ -21,20 +22,25 @@ class _AuthState extends State<Auth> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         centerTitle: true,
         title: const Text(
-          "MOU TRACKER",
+          "Approvals",
           style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: Colors.white,
-        elevation: 0.0,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Icon(Icons.search, color: Colors.black),
+          ),
+        ],
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kTabBarHorizontal,vertical: kTabBarVertical),
+            padding: EdgeInsets.symmetric(horizontal: kTabBarHorizontal,vertical: kTabBarVertical),
             child: Container(
               height: 45,
               decoration: BoxDecoration(
@@ -54,8 +60,8 @@ class _AuthState extends State<Auth> with SingleTickerProviderStateMixin {
                   color: Colors.grey[400],
                 ),
                 tabs: const [
-                  Tab(text: "SIGN IN"),
-                  Tab(text: "SIGN UP"),
+                  Tab(text: "ON TRACK"),
+                  Tab(text: "DELAYED"),
                 ],
               ),
             ),
@@ -64,8 +70,8 @@ class _AuthState extends State<Auth> with SingleTickerProviderStateMixin {
             child: TabBarView(
               controller: _tabController,
               children: const [
-                SignIn(),
-                SignUp(),
+                OnTrackTab(),
+                DelayedTab(),
               ],
             ),
           ),
