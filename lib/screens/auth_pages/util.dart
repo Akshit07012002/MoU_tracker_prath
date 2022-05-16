@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '/values.dart';
-
+/*
+* this file contains common widgets between sign-in & sign-up
+* form element func - Creates form element for login & sign up pages
+* */
 Widget formElement(String text, String hintText) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,

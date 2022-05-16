@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mou_tracker/values.dart';
 import '/screens/auth_pages/util.dart';
-
+/*
+* form element - function from util.dart params - (Main text, hint text)
+* button - params- (main text) TODO: pass navigation data as a param
+* */
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 

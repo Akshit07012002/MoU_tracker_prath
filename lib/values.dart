@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 // Padding & spacing values -> Modify Later Using media query
+// Values are kept const for now since setState has to be called for changing variable values
+// Change to variables later
 
 const double kDefaultHorizontal = 12.0;
 const double kDefaultVertical = 8.0;

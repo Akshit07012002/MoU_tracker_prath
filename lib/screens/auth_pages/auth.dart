@@ -3,6 +3,11 @@ import 'package:mou_tracker/values.dart';
 import '/screens/auth_pages/tab_bar/sign_in_tab.dart';
 import '/screens/auth_pages/tab_bar/sign_up_tab.dart';
 
+
+/* Authentication page - Login & sign-up
+* Custom Tab bar - Container + rounded border
+* */
+
 class Auth extends StatefulWidget {
   const Auth({Key? key}) : super(key: key);
 
