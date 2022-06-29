@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import '/screens/skeleton/tracking_screens/Tab_bar/Tabs/engagement.dart';
 import '/screens/skeleton/tracking_screens/Tab_bar/Tabs/info.dart';
 import '/screens/skeleton/tracking_screens/Tab_bar/Tabs/track.dart';
-import '/values.dart';
-
+import '/util/values.dart';
 
 class Track extends StatefulWidget {
   const Track({Key? key}) : super(key: key);
@@ -14,26 +13,32 @@ class Track extends StatefulWidget {
 
 class _TrackState extends State<Track> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  List colors = [
+    kTabBarGreen,
+    kTabBarYellow,
+    kTabBarBlue,
+  ];
+
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
+    int i = 0;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xff2d376e),
         centerTitle: true,
         title: const Text(
           "Tracking",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
         actions: const [
           Padding(
             padding: EdgeInsets.all(16.0),
-            child: Icon(Icons.search, color: Colors.black),
+            child: Icon(Icons.search, color: Colors.white),
           ),
         ],
       ),
@@ -41,31 +46,40 @@ class _TrackState extends State<Track> with SingleTickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding:
-            EdgeInsets.symmetric(horizontal: kTabBarHorizontal,vertical: kTabBarVertical),
+            padding: const EdgeInsets.symmetric(
+                horizontal: kTabBarHorizontal, vertical: kTabBarVertical),
             child: Container(
+              padding: const EdgeInsets.all(2.0),
               height: 45,
               decoration: BoxDecoration(
                 border: Border.all(width: kBorderWidth, color: Colors.black),
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(
-                  25.0,
+                  16.0,
                 ),
               ),
               child: TabBar(
                 controller: _tabController,
-                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
                 indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    25.0,
+                    16.0,
                   ),
-                  color: Colors.grey[400],
+                  color: colors[_tabController.index],
                 ),
                 tabs: const [
                   Tab(text: "INFO"),
                   Tab(text: "ENGAGEMENT"),
                   Tab(text: "TRACK"),
                 ],
+                labelStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600),
+                unselectedLabelStyle: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -73,8 +87,8 @@ class _TrackState extends State<Track> with SingleTickerProviderStateMixin {
             child: TabBarView(
               controller: _tabController,
               children: const [
-                EngagementTab(),
                 InfoTab(),
+                EngagementTab(),
                 TrackTab(),
               ],
             ),

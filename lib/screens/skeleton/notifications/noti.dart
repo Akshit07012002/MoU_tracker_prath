@@ -17,7 +17,7 @@ class _NotiState extends State<Noti> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: const [
           Center(child: Text("Notifications")),
         ],
       ),

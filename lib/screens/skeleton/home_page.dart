@@ -1,17 +1,18 @@
+import '/util/values.dart';
 import '/screens/skeleton/tracking_screens/Tab_bar/tracking_tab_bar.dart';
 import '/screens/skeleton/status_screens/Tab_bar/status_tab_bar.dart';
 import '/screens/skeleton/notifications/noti.dart';
 import '/screens/skeleton/accounts/account.dart';
 import 'package:flutter/material.dart';
 
-class Page1 extends StatefulWidget {
-  const Page1({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _Page1State createState() => _Page1State();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _Page1State extends State<Page1> {
+class _HomePageState extends State<HomePage> {
   int curr = 0;
   static const List<Widget> _widgetList = [
     Status(),
@@ -28,14 +29,15 @@ class _Page1State extends State<Page1> {
   }
 
   void _onItemTapped(int index) {
-    // print(index);
     setState(() => curr = index);
   }
 
   Widget _bottomNavbar(int curr) {
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: kBgClr2,
       unselectedItemColor: Colors.grey,
-      selectedItemColor: Colors.black,
+      selectedItemColor: Colors.white,
       iconSize: 30,
       items: const [
         BottomNavigationBarItem(

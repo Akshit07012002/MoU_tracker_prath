@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/values.dart';
+import '../../../util/values.dart';
 import '/screens/auth_pages/util.dart';
 
 class SignUp extends StatefulWidget {

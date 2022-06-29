@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/values.dart';
+import '../../util/values.dart';
 /*
 * this file contains common widgets between sign-in & sign-up
 * form element func - Creates form element for login & sign up pages
@@ -13,15 +13,15 @@ Widget formElement(String text, String hintText) {
         style:
             const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       ),
-      SizedBox(height: kFormSpacing / 2),
+      const SizedBox(height: kFormSpacing / 2),
       TextFormField(
         onChanged: (val) {},
         decoration: InputDecoration(
           hintText: hintText,
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.black, width: kBorderWidth),
           ),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.black, width: kBorderWidth),
           ),
         ),
@@ -35,7 +35,7 @@ Widget button(String text) {
     onPressed: () {},
     style: ButtonStyle(
         shape: MaterialStateProperty.all<ContinuousRectangleBorder>(
-            ContinuousRectangleBorder(side: BorderSide(width: kBorderWidth))),
+            const ContinuousRectangleBorder(side: BorderSide(width: kBorderWidth))),
         elevation: MaterialStateProperty.all(0.0),
         backgroundColor: MaterialStateProperty.all(Colors.white)),
     child: Text(text, style: const TextStyle(color: Colors.black)),

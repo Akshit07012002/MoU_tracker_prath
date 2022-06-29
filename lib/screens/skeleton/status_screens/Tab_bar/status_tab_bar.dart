@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/values.dart';
+import '../../../../util/values.dart';
 
 import 'Tabs/delayed_tab.dart';
 import 'Tabs/on_track_tab.dart';
@@ -40,7 +40,7 @@ class _StatusState extends State<Status> with SingleTickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: kTabBarHorizontal,vertical: kTabBarVertical),
+            padding: const EdgeInsets.symmetric(horizontal: kTabBarHorizontal,vertical: kTabBarVertical),
             child: Container(
               height: 45,
               decoration: BoxDecoration(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mou_tracker/values.dart';
+import 'package:mou_tracker/util/values.dart';
 import '/screens/auth_pages/util.dart';
 /*
 * form element - function from util.dart params - (Main text, hint text)
@@ -17,32 +17,32 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Form(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: kFormHorizontal),
+        padding: const EdgeInsets.symmetric(horizontal: kFormHorizontal),
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: kFormSpacing),
+              const SizedBox(height: kFormSpacing),
 
               formElement("EMAIL", "abc@gmail.com"),
-              SizedBox(height: kFormSpacing),
+              const SizedBox(height: kFormSpacing),
 
               formElement("DESIGNATION", "Initiator, SPOC, Director"),
-              SizedBox(height: kFormSpacing),
+              const SizedBox(height: kFormSpacing),
 
               formElement("PASSWORD", ""),
               TextButton(
                   onPressed: () {},
                   child: const Text("Forgot Password?",
                       style: TextStyle(color: Colors.black))),
-              SizedBox(height: kFormSpacing),
+              const SizedBox(height: kFormSpacing),
 
               Center(
                 child: button("SIGN IN"),
               ),
               ElevatedButton(
                   onPressed: () =>
-                      Navigator.pushReplacementNamed(context, '/page1'),
+                      Navigator.pushReplacementNamed(context, '/home'),
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.grey[300])
                   ),

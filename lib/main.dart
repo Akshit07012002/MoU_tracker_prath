@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'screens/skeleton/page1.dart';
+import 'screens/skeleton/home_page.dart';
 import 'screens/auth_pages/auth.dart';
 void main() {
   runApp(const MyApp());
@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.white));
+        const SystemUiOverlayStyle(statusBarColor: Color(0xff2d376e)));
     return MaterialApp(
-      initialRoute: '/page1',
+      initialRoute: '/home',
       routes: {
         '/login': (_) => const Auth(),
-        '/page1' : (_) => const Page1(),
+        '/home' : (_) => const HomePage(),
         '/auth' : (_) => const Auth(),
       },
     );
