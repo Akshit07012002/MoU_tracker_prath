@@ -1,3 +1,6 @@
+import 'package:mou_tracker/screens/create_mou_page/create.dart';
+import 'package:mou_tracker/screens/skeleton/notifications/notifications_tab_bar.dart';
+
 import '/util/values.dart';
 import '/screens/skeleton/tracking_screens/Tab_bar/tracking_tab_bar.dart';
 import '/screens/skeleton/status_screens/Tab_bar/status_tab_bar.dart';
@@ -16,7 +19,8 @@ class _HomePageState extends State<HomePage> {
   int curr = 0;
   static const List<Widget> _widgetList = [
     Status(),
-    Noti(),
+    // Noti(),
+    Notifications(),
     Track(),
     Account(),
   ];
