@@ -1,9 +1,16 @@
+import '/util/values.dart';
 import 'package:flutter/material.dart';
-import '/screens/skeleton/tracking_screens/Tab_bar/Tabs/engagement.dart';
 import '/screens/skeleton/tracking_screens/Tab_bar/Tabs/info.dart';
 import '/screens/skeleton/tracking_screens/Tab_bar/Tabs/track.dart';
-import '/util/values.dart';
+import '/screens/skeleton/tracking_screens/Tab_bar/Tabs/engagement.dart';
 
+/* MOU Tracking Page
+    This Page is supposed to -
+      Info tab - Display detailed information of Selected MOU (MOU selected from Approvals tab)
+                      Details - [Activities, name, desc, due date, etc]
+      Engagement - Display Activity Details 
+                      Activities - Events which the org that signs that MOU intends to perform in the clg (hiring,internships,etc)
+*/
 class Track extends StatefulWidget {
   const Track({Key? key}) : super(key: key);
 
@@ -13,88 +20,122 @@ class Track extends StatefulWidget {
 
 class _TrackState extends State<Track> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  int _tabIndex = 0;
+
   List colors = [
     kTabBarGreen,
     kTabBarYellow,
     kTabBarBlue,
-  ];
+  ]; // Each Tab bar has a different color when selected
 
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: colors.length, vsync: this)
+      ..addListener(() {
+        setState(() {
+          _tabIndex = _tabController
+              .index; // change tabIndex everything Tab is switched
+        });
+      });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    int i = 0;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xff2d376e),
+        backgroundColor: kBgClr2,
         centerTitle: true,
         title: const Text(
           "Tracking",
           style: TextStyle(color: Colors.white),
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Icon(Icons.search, color: Colors.white),
+            padding: const EdgeInsets.all(16.0),
+            child: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.search),
+                color: Colors.white),
           ),
         ],
+        // bottom only accepts normal TabBar(), but ours is wrapped for custom style.
+        bottom: PreferredSize(
+            preferredSize: Size.fromHeight(screenHeight * 0.1),
+            child: _customTabBar()),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: kTabBarHorizontal, vertical: kTabBarVertical),
-            child: Container(
-              padding: const EdgeInsets.all(2.0),
-              height: 45,
-              decoration: BoxDecoration(
-                border: Border.all(width: kBorderWidth, color: Colors.black),
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(
-                  16.0,
-                ),
-              ),
-              child: TabBar(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: kTabBarVertical),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: TabBarView(
                 controller: _tabController,
-                unselectedLabelColor: Colors.grey,
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    16.0,
-                  ),
-                  color: colors[_tabController.index],
-                ),
-                tabs: const [
-                  Tab(text: "INFO"),
-                  Tab(text: "ENGAGEMENT"),
-                  Tab(text: "TRACK"),
+                children: const [
+                  InfoTab(),
+                  EngagementTab(),
+                  TrackTab(),
                 ],
-                labelStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600),
-                unselectedLabelStyle: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600),
               ),
             ),
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: const [
-                InfoTab(),
-                EngagementTab(),
-                TrackTab(),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
+  }
+
+  // Function to build a single tab for tab bar
+  /* Note -
+      TabBar widget also has a color property, but Its using the updated value of index unless we hot reload.
+      Color change only works between 2 colors I guess.
+  */
+  Widget _buildTab(String title, int i) {
+    return Container(
+      decoration: BoxDecoration(
+        color: _tabIndex == i ? colors[_tabIndex] : Colors.transparent,
+        borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+      ),
+      child: Center(child: Text(title)),
+    );
+  }
+
+  // Function to make rounded tab bar
+  Padding _customTabBar() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          horizontal: kTabBarHorizontal, vertical: kTabBarVertical),
+      child: Container(
+        height: 45,
+        decoration: BoxDecoration(
+          border: Border.all(width: kBorderWidth, color: Colors.white),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18.0),
+        ),
+        child: _buildTabBar(),
+      ),
+    );
+  }
+
+  // In-built Flutter Tab bar Widget
+  TabBar _buildTabBar() {
+    return TabBar(
+        labelPadding: const EdgeInsets.all(2),
+        controller: _tabController,
+        indicator:
+            const BoxDecoration(), // Keep empty, This Tab bar doesnt have indicator
+        tabs: [
+          _buildTab('INFO', 0), // index is for color in the list
+          _buildTab('ENGAGEMENT', 1),
+          _buildTab('TRACK', 2),
+        ],
+        labelStyle: _labelStyle(Colors.white),
+        unselectedLabelStyle: _labelStyle(Colors.grey));
+  }
+
+  // All the labels have same style except for color
+  TextStyle _labelStyle(Color clr) {
+    return TextStyle(color: clr, fontSize: 13, fontWeight: FontWeight.w600);
   }
 }

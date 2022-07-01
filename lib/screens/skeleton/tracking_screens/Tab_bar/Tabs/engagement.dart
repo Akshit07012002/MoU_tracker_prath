@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/util/values.dart';
 
 import '/models/activity.dart';
 
@@ -32,13 +33,14 @@ class _EngagementTabState extends State<EngagementTab> {
         Expanded(
           child: ListView.separated(
               itemBuilder: (_, i) => _buildActivityTile(activities[i]),
-              separatorBuilder: (_, i) => const SizedBox(height: 12),
+              separatorBuilder: (_, i) => const SizedBox(height: 12), // Use dynamic height here
               itemCount: activities.length),
         )
       ],
     );
   }
 
+  // Widget to build the List tile for a single activity
   Widget _buildActivityTile(Activity activity) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -46,24 +48,29 @@ class _EngagementTabState extends State<EngagementTab> {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: const Color(0xffedf9ff),
+          color: kTileClr,
         ),
         child: ListTile(
           leading: activity.status == true
-              ? const Icon(Icons.check_box_outlined)
+              ? const Icon(Icons
+                  .check_box_outlined) // tick check box only on completed activities
               : const Icon(Icons.check_box_outline_blank),
           title: Text(activity.name),
           subtitle: Text(activity.desc),
-          trailing: activity.status == true ? _buildTextButton("View") : null,
+          trailing: activity.status == true
+              ? _buildTextButton("View")
+              : null, // view button is only for completed activities
         ),
       ),
     );
   }
 
+  // View button - To View all the details of an activity.
+  // todo - Display full details of an activity.
   TextButton _buildTextButton(String buttonTxt) {
     return TextButton(
-          onPressed: () {  },
-          child: Text(buttonTxt),
-        );
+      onPressed: () {},
+      child: Text(buttonTxt),
+    );
   }
 }

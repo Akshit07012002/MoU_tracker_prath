@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mou_tracker/util/values.dart';
+import '/util/values.dart';
 import '/screens/auth_pages/tab_bar/sign_in_tab.dart';
 import '/screens/auth_pages/tab_bar/sign_up_tab.dart';
 

@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import '../../../../util/values.dart';
-
+import '/util/values.dart';
 import 'Tabs/delayed_tab.dart';
 import 'Tabs/on_track_tab.dart';
+import 'package:flutter/material.dart';
 
 class Status extends StatefulWidget {
   const Status({Key? key}) : super(key: key);

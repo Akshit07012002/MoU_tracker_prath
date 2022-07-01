@@ -10,10 +10,8 @@ class TrackTab extends StatefulWidget {
 class _TrackTabState extends State<TrackTab> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Text("Track Tab"),
-      ),
+    return const Center(
+      child: Text("Track Tab"),
     );
   }
 }

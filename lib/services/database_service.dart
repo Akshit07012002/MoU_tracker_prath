@@ -1,6 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DataBaseService {
+  // Collections for storing data in the cloud firestore.
+  // Structure -
+  /* 
+      Mou collection 
+        |_ Document -> MOU
+              |_ Mou details
+                 Activity collection
+                    |_ Activity docs
+                          |_ Activity details
+  */
   final CollectionReference mou = FirebaseFirestore.instance.collection('mou');
   final CollectionReference activity =
       FirebaseFirestore.instance.collection('activity');
