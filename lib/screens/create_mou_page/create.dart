@@ -4,7 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:mou_tracker/screens/create_mou_page/fields.dart';
 import 'dart:io' as io;
-import '../../services/uploadApi.dart';
+import '../../services/upload_service.dart';
 
 class CreateMou extends StatefulWidget {
   const CreateMou({Key? key}) : super(key: key);
@@ -56,20 +56,6 @@ class CreateMouState extends State<CreateMou> {
                   ? "no file selected"
                   : file!.path.split('/').last),
               button1(pickFile),
-              // FlatButton(
-              //   onPressed: () {
-              //     pickFile();
-              //   },
-              //   child: const SizedBox(
-              //     height: 40,
-              //     width: 400,
-              //     child: Center(
-              //       child: Text("Select file"),
-              //     ),
-              //   ),
-              //   autofocus: true,
-              //   color: const Color(0xFF64C636),
-              // ),
               OutlinedButton(
                 onPressed: () {
                   FirebaseApi.fileUpload();

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class onTrack {
   String title;
   String description;
@@ -40,4 +42,35 @@ List getdelayedList() {
         description:
             "We provide best services in  of Lorem Ipsum avhave suffered alteration in some ..."),
   ];
+}
+
+class NotificationsData {
+  static List delayedMap = [];
+  static List onTrackMap = [];
+
+  static Stream<Iterable<Map<String, dynamic>>> getData() {
+    return FirebaseFirestore.instance
+        .collection('MOUs')
+        .snapshots()
+        .map((event) => event.docs.map((e) => e.data()));
+  }
+
+  static unloadData() {
+    delayedMap.clear();
+    onTrackMap.clear();
+    Stream<Iterable<Map<String, dynamic>>> stream;
+    stream = getData();
+    stream.listen((event) {
+      for (Map e in event) {
+        if ((e["Due Date"] as Timestamp)
+            .toDate()
+            .difference(DateTime.now())
+            .isNegative) {
+          delayedMap.add(e);
+        } else {
+          onTrackMap.add(e);
+        }
+      }
+    });
+  }
 }

@@ -1,9 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mou_tracker/screens/create_mou_page/create.dart';
 import 'screens/skeleton/home_page.dart';
 import 'screens/auth_pages/auth.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -28,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/login': (_) => const Auth(),
         '/home': (_) => const HomePage(),
         '/auth': (_) => const Auth(),
+        '/create_mou': (_) => const CreateMou(),
       },
     );
   }

@@ -21,6 +21,10 @@ class NotificationsState extends State<Notifications>
   void initState() {
     ontracklist = getonTracksList();
     delayedlist = getdelayedList();
+
+    // NotificationsData.unloadData();
+    // delayedlist = NotificationsData.delayedMap;
+    // ontracklist = NotificationsData.onTrackMap;
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(() {
       setState(() {

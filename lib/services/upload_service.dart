@@ -4,6 +4,7 @@ import '../screens/create_mou_page/create.dart';
 import 'dart:io' as io;
 
 class FirebaseApi {
+  static var downloadUrl = null;
   static Future fileUpload() async {
     if (CreateMouState.file == null) {
       print("not done");
@@ -14,7 +15,8 @@ class FirebaseApi {
 
       CreateMouState.task =
           FirebaseApi.uploadTask(location, CreateMouState.file!);
-      //final snapshot = await createMouState.task!.whenComplete(() {});
+      final snapshot = await CreateMouState.task!.whenComplete(() {});
+      downloadUrl = await snapshot.ref.getDownloadURL();
       print("done");
     }
   }
@@ -68,6 +70,24 @@ class FirebaseApi {
   }
 }
 
+Widget buildUploadStatus(UploadTask task) => StreamBuilder<TaskSnapshot>(
+      stream: task.snapshotEvents,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final snap = snapshot.data!;
+          final progress = snap.bytesTransferred / snap.totalBytes;
+          final percentage = (progress * 100).toStringAsFixed(2);
+
+          return Text(
+            '$percentage %',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          );
+        } else {
+          return Text("Uploading...");
+        }
+      },
+    );
+
 class FirebaseFile {
   final Reference ref;
   final String name;
@@ -92,21 +112,3 @@ Widget buildFile(BuildContext context, FirebaseFile file) => ListTile(
     onTap: () async {
       await FirebaseApi.download(file.ref);
     });
-
-Widget buildUploadStatus(UploadTask task) => StreamBuilder<TaskSnapshot>(
-      stream: task.snapshotEvents,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          final snap = snapshot.data!;
-          final progress = snap.bytesTransferred / snap.totalBytes;
-          final percentage = (progress * 100).toStringAsFixed(2);
-
-          return Text(
-            '$percentage %',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          );
-        } else {
-          return Text("Uploading...");
-        }
-      },
-    );
